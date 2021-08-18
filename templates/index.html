@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+
+{% block title %}Quizhibit{% endblock %}
+
+{% block banner %}
+<div class="home-banner">
+    <h1 class="banner-header">Quizhibit</h1>
+</div>
+{% endblock %}
+
+{% block body %}
+    <div class="main-index">
+    {% if session.user_id %}
+        <h2 class="welcome">Welcome, {{ name }}</h2>
+        {% if quizAverage %}
+        <div class="quiz-average">
+            <p>Your quiz average is {{ quizAverage }}%</p>
+        </div>
+        {% endif %}
+    <hr>
+    {% endif %}
+    <div class="disclaimer text-center">
+        <p>Artworks and data curtesy of The Metropolitan Museum of Art's CC0 select datasets. This app is not affiliated with or endorsed by the MET,
+        but they make their API available to everyone and that's really nice of them.</p>
+        <div>Empty heart icon made by <a href="https://www.freepik.com" target="_blank" title="Freepik">Freepik</a>
+            from <a href="https://www.flaticon.com/" target="_blank" title="Flaticon">www.flaticon.com</a></div>
+        <div>Full heart icons made by <a href="https://www.flaticon.com/authors/kiranshastry" target="_blank" title="Kiranshastry">Kiranshastry</a>
+            from <a href="https://www.flaticon.com/" target="_blank" title="Flaticon">www.flaticon.com</a></div>
+    </div>
+
+    <div class="index-link-container">
+        <img src="{{ pictures[0]["image"] }}" class="index-pic" alt="{{ pictures[0]["title"] }}">
+        <div class="index-description">
+            <h2><a href="/quiz">Quiz</a></h2>
+            <p>Match the works of art to the artist and title!</p>
+            <div class="attribution-container">
+                <div class="attribution-left">
+                    <p class="work-title">{{ pictures[0]["title"] }}</p>
+                    <p class="work-artist">by {{ pictures[0]["artist"] }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="index-link-container">
+        <div class="index-description-right">
+            <h2><a href="/gallery">Gallery</a></h2>
+            <p>Bowse the public domain works on display at the Met</p>
+            <div class="attribution-container">
+                <div class="attribution-right">
+                    <p class="work-title">{{ pictures[1]["title"] }}</p>
+                    <p class="work-artist">by {{ pictures[1]["artist"] }}</p>
+                </div>
+            </div>
+        </div>
+        <img src="{{ pictures[1]["image"] }}" class="index-pic" alt="{{ pictures[1]["title"] }}">
+    </div>
+    <hr>
+    <div class="index-link-container">
+        <img src="{{ pictures[2]["image"] }}" class="index-pic" alt="{{ pictures[2]["title"] }}">
+        <div class="index-description">
+            <h2><a href="/register">Register</a></h2>
+            <p>Make and account to manage favorites</p>
+            <div class="attribution-container">
+                <div class="attribution-left">
+                    <p class="work-title">{{ pictures[2]["title"] }}</p>
+                    <p class="work-artist">by {{ pictures[2]["artist"] }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="index-link-container">
+        <div class="index-description-right">
+            <h2><a href="/aboutme">About Me</a></h2>
+            <p>Read about Rachel Gilyard, creator of this web app</p>
+            <div class="attribution-container">
+                <div class="attribution-right">
+                    <p class="work-title">{{ pictures[3]["title"] }}</p>
+                    <p class="work-artist">by {{ pictures[3]["artist"] }}</p>
+                </div>
+            </div>
+        </div>
+        <img src="{{ pictures[3]["image"] }}" class="index-pic" alt="{{ pictures[3]["title"] }}">
+    </div>
+    <hr>
+    <div class="index-link-container">
+        <img src="{{ pictures[4]["image"] }}" class="index-pic" alt="{{ pictures[4]["title"] }}">
+        <div class="index-description">
+            <h2><a href="https://metmuseum.github.io/" target="_blank">Met API</a></h2>
+            <p>Visit the The Metropolitan Museum of Art Collection API page</p>
+            <div class="attribution-container">
+                <div class="attribution-left">
+                    <p class="work-title">{{ pictures[4]["title"] }}</p>
+                    <p class="work-artist">by {{ pictures[4]["artist"] }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="index-link-container">
+        <div class="index-description-right">
+            <h2><a href="https://cs50.harvard.edu/x/2021/" target="_blank">CS50x</a></h2>
+            <p>Learn to make your own web app with the free CS50x course!</p>
+            <div class="attribution-container">
+                <div class="attribution-right">
+                    <p class="work-title">{{ pictures[5]["title"] }}</p>
+                    <p class="work-artist">by {{ pictures[5]["artist"] }}</p>
+                </div>
+            </div>
+        </div>
+        <img src="{{ pictures[5]["image"] }}" class="index-pic" alt="{{ pictures[5]["title"] }}">
+    </div>
+</div>
+{% endblock %}

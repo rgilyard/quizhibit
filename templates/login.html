@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Log In{% endblock %}
+
+{% block body %}
+
+{% if alert %}
+<p class="alert center">{{ alert }}</p>
+{% endif %}
+
+<h1>Log In</h1>
+<hr>
+<div class="centering-container">
+    <form action="/login" method="post">
+        <div>
+            <input autocomplete="off" autofocus name="username" placeholder="Username" type="text">
+        </div>
+        <br>
+        <div>
+            <input name="password" placeholder="Password" type="password">
+        </div>
+        <div class="centering-container">
+            <input class="input-button" type="submit" value="Log In">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,157 @@
+{% extends "layout.html" %}
+
+{% block title %}Gallery{% endblock %}
+{% block banner %}
+<div class="home-banner">
+    <h1 class="banner-header">Gallery</h1>
+</div>
+{% endblock %}
+{% block body %}
+<br>
+<br>
+<div class="main-gallery">
+    <div class="gallery-form">
+        <form action="/gallery" method="post" class="search">
+            <div>
+                <label for="department">Filter by department:</label>
+                <select name="department" id="department">
+                    <option value="all" selected>All</option>
+                    {% for row in departments %}
+                        <option value="{{ row.department }}">{{ row.department }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="category">Filter by category:</label>
+                <select name="category" id="category">
+                    <option value="all" selected>All</option>
+                    {% for row in categories %}
+                        <option value="{{ row.classification }}">{{ row.classification }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="hidden" id="currPage" name="currPage" value="{{ currPage }}">
+            <input type="hidden" id="pages" name="pages" value="{{ pages }}">
+            <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+            <input type="hidden" id="numPics" name="numPics" value="{{ numPics }}">
+            <input type="hidden" id="display" name="display" value="{{ display }}">
+            <input class="search-box" type="text" id="keyword" name="keyword" maxlength="20"
+                   placeholder="Keyword">
+            <input class="search-button" type="submit" value="Search">
+        </form>
+    </div>
+    <hr>
+    <div class="gallery-container">
+    {% for i in range(displayNum) %}
+        <div class="black-wrapper">
+
+        {% if session.user_id %}
+            {% if isFav[i] == False %}
+                <form action="/gallery" method="post">
+                    <input type="hidden" id="departments" name="departments" value="{{ departments }}">
+                    <input type="hidden" id="categories" name="categories" value="{{ categories }}">
+                    <input type="hidden" id="display" name="display" value="{{ display }}">
+                    <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                    <input type="hidden" id="numPics" name="numPics" value="{{ numPics }}">
+                    <input type="hidden" id="currPage" name="currPage" value="{{ currPage }}">
+                    <input type="hidden" id="pages" name="pages" value="{{ pages }}">
+                    <input type="hidden" id="firstPic" name="firstPic" value="{{ firstPic }}">
+                    <input type="hidden" id="picRange" name="picRange" value="{{ picRange }}">
+                    <input type="hidden" id="displayNum" name="displayNum" value="{{ displayNum }}">
+                    <input type="hidden" id="newFav" name="newFav" value="{{ display[i]["objectId"] }}">
+                    <input type="hidden" id="favorite" name="favorite" value="true">
+                    <button name="heart" id="heart" type="submit" class="heart empty"></button>
+                </form>
+            {% else %}
+                <form action="/gallery" method="post">
+                    <input type="hidden" id="departments" name="departments" value="{{ departments }}">
+                    <input type="hidden" id="categories" name="categories" value="{{ categories }}">
+                    <input type="hidden" id="display" name="display" value="{{ display }}">
+                    <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                    <input type="hidden" id="numPics" name="numPics" value="{{ numPics }}">
+                    <input type="hidden" id="currPage" name="currPage" value="{{ currPage }}">
+                    <input type="hidden" id="pages" name="pages" value="{{ pages }}">
+                    <input type="hidden" id="firstPic" name="firstPic" value="{{ firstPic }}">
+                    <input type="hidden" id="picRange" name="picRange" value="{{ picRange }}">
+                    <input type="hidden" id="displayNum" name="displayNum" value="{{ displayNum }}">
+                    <input type="hidden" id="unFav" name="unFav" value="{{ display[i]["objectId"] }}">
+                    <input type="hidden" id="unFavorite" name="unFavorite" value="true">
+                    <button name="heart" id="heart" type="submit" class="heart full"></button>
+                </form>
+            {% endif %}
+        {% endif %}
+
+            <div class="gallery-item" style="background-image: url({{ display[i]["image"] }})">
+
+                <div class="attribution-container" onMouseEnter="onMouseOver(event);"
+                        onMouseOut="onMouseOut(event);">
+                    <div class="attribution">
+                        <div class="attribution-item">
+                            <p class="work-title">{{ display[i]["title"] }}</p>
+                            <p class="work-artist">by {{ display[i]["artist"] }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <br>
+    <div class="pages-wrapper">
+        <div class="page-count-wrapper">
+            <p class="page-count">displaying page {{ currPage }} of {{ pages }} pages</p>
+        </div>
+        <div class="pages">
+        {% if currPage > 1 %}
+            <form class="pages-form" action="/gallery" method="post">
+                <input type="hidden" id="currPage" name="currPage" value="{{ currPage }}">
+                <input type="hidden" id="pages" name="pages" value="{{ pages }}">
+                <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                <input type="hidden" id="numPics" name="numPics" value="{{ numPics }}">
+                <input type="hidden" id="first" name="first" value="true">
+                <input type="submit" value="<<">
+            </form>
+            <form class="pages-form" action="/gallery" method="post">
+                <input type="hidden" id="currPage" name="currPage" value="{{ currPage }}">
+                <input type="hidden" id="pages" name="pages" value="{{ pages }}">
+                <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                <input type="hidden" id="numPics" name="numPics" value="{{ numPics }}">
+                <input type="hidden" id="previous" name="previous" value="true">
+                <input type="submit" value="<">
+            </form>
+        {% endif %}
+            <form class="pages-form" action="/gallery" method="post">
+                <input type="hidden" id="currPage" name="currPage" value="{{ currPage }}">
+                <input type="hidden" id="pages" name="pages" value="{{ pages }}">
+                <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                <input type="hidden" id="numPics" name="numPics" value="{{ numPics }}">
+                <input type="hidden" id="goto" name="goto" value="true">
+                <input type="submit" value="go to:">
+                <input type="text" id="gotoPage" name="gotoPage" pattern="[0-9]{2}" max="{{ pages }}"
+                        min="1" value="{{ currPage }}" size="2" title="Type a number between the available pages">
+            </form>
+        {% if currPage < pages %}
+            <form class="pages-form" action="/gallery" method="post">
+                <input type="hidden" id="currPage" name="currPage" value="{{ currPage }}">
+                <input type="hidden" id="pages" name="pages" value="{{ pages }}">
+                <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                <input type="hidden" id="numPics" name="numPics" value="{{ numPics }}">
+                <input type="hidden" id="next" name="next" value="true">
+                <input type="submit" value=">">
+            </form>
+            <form class="pages-form" action="/gallery" method="post">
+                <input type="hidden" id="currPage" name="currPage" value="{{ currPage }}">
+                <input type="hidden" id="pages" name="pages" value="{{ pages }}">
+                <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                <input type="hidden" id="numPics" name="numPics" value="{{ numPics }}">
+                <input type="hidden" id="last" name="last" value="true">
+                <input type="submit" value=">>">
+            </form>
+        {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

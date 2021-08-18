@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}Settings{% endblock %}
+{% block banner %}
+<div class="home-banner">
+    <h1 class="banner-header">Settings</h1>
+</div>
+{% endblock %}
+
+{% block body %}
+
+{% if alert %}
+<p class="alert center">{{ alert }}</p>
+{% endif %}
+
+<div class="form">
+    <form action="/quiz" method="post">
+        <label for="department">Filter by department:</label>
+        <select name="department" id="department">
+            <option value="all" selected>All</option>
+            {% for row in departments %}
+                <option value="{{ row.department }}">{{ row.department }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="category">Filter by category:</label>
+        <select name="category" id="category">
+            <option value="all" selected>All</option>
+            {% for row in categories %}
+                <option value="{{ row.classification }}">{{ row.classification }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="difficulty">Set difficulty:</label>
+        <select name="difficulty" id="difficulty">
+            <option value="0.75" selected>Easy</option>
+            <option value="0.5">Medium</option>
+            <option value="0.25">Hard</option>
+            <option value="0.0">Expert</option>
+        </select>
+        <br>
+        <label for="gridSize">Set grid size:</label>
+        <select name="gridSize" id="gridSize">
+            <option value="2" selected>2 x 2</option>
+            <option value="3">3 x 3</option>
+            <option value="4">4 x 4</option>
+            <option value="5">5 x 5</option>
+        </select>
+        <br>
+        <input type="submit" value="Go">
+    </form>
+    {% if session.user_id %}
+    <hr>
+    <form action="/quiz" method="post">
+        <p>Or, quiz yourself on your favorites:</p>
+        <label for="gridSize">Set grid size:</label>
+        <select name="gridSize" id="gridSize">
+            <option value="2" selected>2 x 2</option>
+            <option value="3">3 x 3</option>
+            <option value="4">4 x 4</option>
+            <option value="5">5 x 5</option>
+        </select>
+        <br>
+        <input type="hidden" id="favoriteQuiz" name="favoriteQuiz" value="true">
+        <input type="submit" value="Quiz on Favorites">
+    </form>
+    {% endif %}
+</div>
+
+{% endblock %}

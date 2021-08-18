@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}Quiz{% endblock %}
+
+{% block body %}
+
+<div class="main-container">
+    <div class="main-item-left">
+        <form class="grid-container" action="/results" method="post">
+
+            {% for i in range(numMatches) %}
+                <div class="grid-item" style="width: {{ width }}%;">
+                    <div class="picture-container">
+                        <div class="picture-item">
+                            <div class="dropzone-container">
+                                <div class="dropzone-item" style="min-height: {{ width }}px;"
+                                     id="" name="question{{ i }}" ondragover="onDragOver(event);"
+                                     ondrop="onDrop(event);" ondragenter="onDragEnter(event);"
+                                     ondragexit="onDragExit(event);"></div>
+                            </div>
+                        </div>
+                        <div class="picture-item">
+                            <img class="img" src="{{ mixes[i]["image"] }}" style="max-height: {{ width * 5 }}px;">
+                            <input type="hidden" name="picture{{ i }}" value="{{ mixes[i]["objectId"] }}">
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <input type="hidden" name="numMatches" value="{{ numMatches }}">
+            <input type="hidden" name="width" value="{{ width }}">
+            <button type="submit">Done</button>
+        </form>
+    </div>
+
+    <div class="main-item-right">
+        <div class="answer-container">
+            {% for i in range(numMatches) %}
+
+                <div class="answer-item">
+                    <div class="dropzone-container">
+                        <div class="dropzone-item" id="drop{{ i }}" style="min-height: {{ width }}px;" ondragover="" ondrop="onDrop(event);"
+                             ondragenter="onDragEnter(event);" ondragexit="onDragExit(event);">
+                            <div class="draggable" id="drag{{ i }}" draggable="true" ondragstart="onDragStart(event);"
+                                 ondragend="onDragEnd(event);">
+                                <label for="answer{{ i }}">
+                                    <h3>{{ matches[i]["title"] }}</h3>
+                                    <p class="by" style="font-style: italic;">by</p>
+                                    <h3>{{ matches[i]["artist"] }}</h3>
+                                </label>
+                                <input type="hidden" id="answer{{ i }}" name="answer{{ i }}" value="{{ matches[i]["objectId"] }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

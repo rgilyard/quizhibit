@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+
+{% block title %}Settings{% endblock %}
+{% block banner %}
+<div class="home-banner">
+    <h1 class="banner-header">Settings</h1>
+</div>
+{% endblock %}
+
+{% block body %}
+
+{% if alert %}
+<p class="alert center">{{ alert }}</p>
+{% endif %}
+<div class="settings-container">
+    <div class="form-column">
+        <div class="form">
+            <form action="/quiz" method="post">
+
+                <div class="form-container">
+
+                    <div class="form-item">
+                        <label for="department">Filter by department:</label>
+                        <select name="department" id="department">
+                            <option value="all" selected>All</option>
+                            {% for row in departments %}
+                                <option value="{{ row.department }}">{{ row.department }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label for="category">Filter by category:</label>
+                        <select name="category" id="category">
+                            <option value="all" selected>All</option>
+                            {% for row in categories %}
+                                <option value="{{ row.classification }}">{{ row.classification }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label for="difficulty">Set difficulty:</label>
+                        <select name="difficulty" id="difficulty" onchange="diffChange(this.value);">
+                            <option value="0.75" selected>Easy</option>
+                            <option value="0.5">Medium</option>
+                            <option value="0.25">Hard</option>
+                            <option value="0.0">Expert</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label for="gridSize">Set grid size:</label>
+                        <select name="gridSize" id="gridSize" onchange="gridChange(this.value);">
+                            <option value="2" selected>2 x 2</option>
+                            <option value="3">3 x 3</option>
+                            <option value="4">4 x 4</option>
+                            <option value="5">5 x 5</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <input type="submit" value="Go">
+                    </div>
+                </div> <!--End form container-->
+            </form>
+            {% if session.user_id %}
+            <br>
+            <hr>
+            <br>
+            <form action="/quiz" method="post">
+                <div class="form-container">
+                    <div class="form-item">
+                        <p>Or, quiz yourself on your favorites:</p>
+                    </div>
+                    <div class="form-item">
+                        <label for="gridSize">Set grid size:</label>
+                        <select name="gridSize" id="gridSize" onchange="gridChange(this.value);">
+                            <option value="2" selected>2 x 2</option>
+                            <option value="3">3 x 3</option>
+                            <option value="4">4 x 4</option>
+                            <option value="5">5 x 5</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <input type="hidden" id="favoriteQuiz" name="favoriteQuiz" value="true">
+                        <input type="submit" value="Quiz on Favorites">
+                    </div>
+                </div> <!--End form container-->
+            </form>
+            {% endif %}
+        </div>
+    </div>
+
+
+
+    <div class="preview-column">
+        <div class="window-container">
+            {% if not session.user_id %}
+            <div class="spacer"></div>
+            {% endif %}
+            <div class="window-item">
+                <div class="preview-container" id="preview-container">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+function setPreview() {
+    // Get preview container where we'll preview the quiz grid
+    let preview = document.getElementById('preview-container');
+    // Remove all children from preview box
+    preview.innerHTML = '';
+
+    for (let i = 0; i < 4; i++) {
+        // Create child divs to append
+        let box = document.createElement('div');
+        box.setAttribute('class', 'twoBy');
+        box.setAttribute('style', 'background-color: lightblue;');
+        // Append to preview div
+        preview.appendChild(box);
+    }
+}
+window.onload = setPreview;
+</script>
+
+{% endblock %}

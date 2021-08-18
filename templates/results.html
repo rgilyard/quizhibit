@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block body %}
+
+<div class="result-data-wrapper">
+    <div class="result-data">
+        <h1>{{ quizPercentCorrect }}%</h1>
+        <h2>You got {{ numCorrect }}/{{ numMatches }} correct!</h2>
+    </div>
+</div>
+
+<div class="grid-container">
+    {% for i in range(numMatches) %}
+        <div class="grid-item" style="width: {{ width }}%;">
+            <div class="result-container" style="background-color: {{ results[i] }}">
+                <div class="result-item" style="background-color: {{ results[i] }}">
+
+                {% if session.user_id %}
+                    {% if isFav[i] == False %}
+                        <form action="/results" method="post">
+                            <input type="hidden" id="keyRows" name="keyRows" value="{{ keyRows }}">
+                            <input type="hidden" id="answerRows" name="answerRows" value="{{ answerRows }}">
+                            <input type="hidden" id="results" name="results" value="{{ results }}">
+                            <input type="hidden" id="width" name="width" value="{{ width }}">
+                            <input type="hidden" id="numMatches" name="numMatches" value="{{ numMatches }}">
+                            <input type="hidden" id="numCorrect" name="numCorrect" value="{{ numCorrect }}">
+                            <input type="hidden" id="quizPercentCorrect" name="quizPercentCorrect" value="{{ quizPercentCorrect }}">
+                            <input type="hidden" id="newFav" name="newFav" value="{{ keyRows[i]["objectId"] }}">
+                            <input type="hidden" id="favorite" name="favorite" value="true">
+                            <button name="heart" id="heart" type="submit" class="heart empty"></button>
+                        </form>
+                    {% else %}
+                        <form action="/results" method="post">
+                            <input type="hidden" id="keyRows" name="keyRows" value="{{ keyRows }}">
+                            <input type="hidden" id="answerRows" name="answerRows" value="{{ answerRows }}">
+                            <input type="hidden" id="results" name="results" value="{{ results }}">
+                            <input type="hidden" id="width" name="width" value="{{ width }}">
+                            <input type="hidden" id="numMatches" name="numMatches" value="{{ numMatches }}">
+                            <input type="hidden" id="numCorrect" name="numCorrect" value="{{ numCorrect }}">
+                            <input type="hidden" id="quizPercentCorrect" name="quizPercentCorrect" value="{{ quizPercentCorrect }}">
+                            <input type="hidden" id="unFav" name="unFav" value="{{ keyRows[i]["objectId"] }}">
+                            <input type="hidden" id="unFavorite" name="unFavorite" value="true">
+                            <button name="heart" id="heart" type="submit" class="heart full"></button>
+                        </form>
+                    {% endif %}
+                {% endif %}
+                    <div class="result-content-wrapper">
+                        <img class="img" src="{{ keyRows[i]["image"] }}" style="max-height: {{ width * 7 }}px;">
+                    </div>
+
+
+                </div>
+                <div class="result-item" style="background-color: {{ results[i] }}">
+                    <div class="result-content-wrapper">
+                        <h4>Correct Answer:</h4>
+                        <h3>{{ keyRows[i]["title"] }}</h3>
+                        <p class="by" style="font-style: italic;">by</p>
+                        <h3>{{ keyRows[i]["artist"] }}</h3>
+                    </div>
+                </div>
+                <div class="result-item" style="background-color: {{ results[i] }}">
+                    <div class="result-content-wrapper">
+                        <h4>Your Answer:</h4>
+                        <h3>{{ answerRows[i]["title"] }}</h3>
+                        <p class="by" style="font-style: italic;">by</p>
+                        <h3>{{ answerRows[i]["artist"] }}</h3>
+                    </div>
+                </div>
+                <!--<div class="result-item" style="background-color: {{ results[i] }}">
+                    <div class="result-content-wrapper">
+                        <h4>Favorite</h4>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
