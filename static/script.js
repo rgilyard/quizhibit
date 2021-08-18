@@ -174,11 +174,20 @@ function onMouseOut(event) {
 //////////////////////////////////////////////////////////////////////////////////////////
 // Settings page
 
+// Changes the size and number of preview boxes according to grid size
 function gridChange(selectValue) {
     // Get preview container where we'll preview the quiz grid
     let preview = document.getElementById('preview-container');
     // Get background color from current children
     let background = preview.firstChild.getAttribute('style');
+
+    // If there is a hidden info div
+    if (!preview.firstChild.getAttribute('class')) {
+        console.log('Constructing background color');
+        // Delete display attribute
+        background = background.slice(15, background.length);
+    }
+
     // Remove all children from preview box
     preview.innerHTML = '';
     // Get gridsize
@@ -211,20 +220,124 @@ function gridChange(selectValue) {
     }
 }
 
+// Changes the color of the preview boxes according to difficulty
 function diffChange(selectValue) {
     // Get preview container where we'll preview the quiz grid
     let preview = document.getElementById('preview-container');
-    // Get childNodes
-    let boxes = preview.childNodes;
+    // Get class attribute from first child
+    let classAttr = preview.firstChild.getAttribute('class');
+    // If there is a hidden info div
+    if (!preview.firstChild.getAttribute('class')) {
+        // Get old grid size
+        classAttr = preview.firstChild.getAttribute('id');
 
-    let length = boxes.length;
-    // Set attribute for each node in the list
-    for (let i = 0; i < length; i++) {
-        boxes[i].setAttribute('style', 'background-color: red;');
+    }
+    // Assign size based on class
+    if (classAttr == 'twoBy') {
+        size = 2;
+    } else if (classAttr == 'threeBy') {
+        size = 3;
+    } else if (classAttr == 'fourBy') {
+        size = 4;
+    } else {
+        size = 5;
+    }
+    // Remove all children from preview box
+    preview.innerHTML = '';
+    // Set background color based on difficulty
+    let difficulty = selectValue;
+    let color;
+    if (difficulty == 0.75) {
+        color = 'background-color: #add8e6';
+    }
+    else if (difficulty == 0.5) {
+        color = 'background-color: #90ee90';
+    }
+    else if (difficulty == 0.25) {
+        color = 'background-color: #FFBE7D';
+    }
+    else {
+        color = 'background-color: #FF7D7D';
+    }
+
+    // Get number of boxes in grid
+    size = size * size;
+
+    for (let i = 0; i < size; i++) {
+        // Create child divs to append
+        let box = document.createElement('div');
+        // Set class for box size
+        box.setAttribute('class', classAttr);
+        // Set style for background color
+        box.setAttribute('style', color);
+        // Append to preview div
+        preview.appendChild(box);
     }
 }
 
-function setPreview() {
+// This sets the background to heart icons for the favorites grid preview
+function favGrid(selectValue) {
+    // Get preview container where we'll preview the quiz grid
+    let preview = document.getElementById('preview-container');
+    // Create hidden element to save difficulty color
+    let diff = document.createElement('div');
+    // Get old color from current children
+    let color = preview.firstChild.getAttribute('style');
+    // Get old gridSize from current children
+    let gridSize = preview.firstChild.getAttribute('class')
+    // Add display: none attribute to style
+    color = 'display: none; ' + color;
+    diff.setAttribute('style', color);
+    // Save gridSize in id
+    diff.setAttribute('id', gridSize);
+
+    // Remove all children from preview box
+    preview.innerHTML = '';
+    // Get gridsize
+    let size = selectValue;
+    let classAttr;
+    // Change background image size based on grid size
+    let backgroundSize;
+    // Assign class for boxes
+    if (size == 2) {
+        classAttr = 'twoBy';
+        backgroundSize = 'background-size: 190px 190px;';
+    }
+    else if (size == 3) {
+        classAttr = 'threeBy';
+        backgroundSize = 'background-size: 120px 120px;';
+    }
+    else if (size == 4) {
+        classAttr = 'fourBy';
+        backgroundSize = 'background-size: 90px 90px;';
+    }
+    else {
+        classAttr = 'fiveBy';
+        backgroundSize = 'background-size: 70px 70px;';
+    }
+    // Contruct rest of style attribute
+    style = backgroundSize + ' background-image: url(\'/static/images/heartOutline.png\'); background-color: #FFD2DA;';
+    // Get number of boxes in grid
+    size = size * size;
+
+    // Add hidden child to keep track of color
+    preview.appendChild(diff);
+
+    for (let i = 0; i < size; i++) {
+        // Create child divs to append
+        let box = document.createElement('div');
+        // Set class for box size
+        box.setAttribute('class', classAttr);
+        // Set style for background color
+        box.setAttribute('style', style);
+        // Append to preview div
+        preview.appendChild(box);
+    }
+}
+
+
+// Sets the first preview boxes on load (This is copied in the setting.html page)
+/*function setPreview() {
     console.log('HERE');
     // Get preview container where we'll preview the quiz grid
     let preview = document.getElementById('preview-container');
@@ -239,4 +352,4 @@ function setPreview() {
         // Append to preview div
         preview.appendChild(box);
     }
-}
+}*/

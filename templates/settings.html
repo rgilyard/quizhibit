@@ -13,6 +13,19 @@
 <p class="alert center">{{ alert }}</p>
 {% endif %}
 <div class="settings-container">
+
+    <div class="preview-column">
+        <div class="window-container">
+            {% if not session.user_id %}
+            <div class="spacer"></div>
+            {% endif %}
+            <div class="window-item">
+                <div class="preview-container" id="preview-container">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="form-column">
         <div class="form">
             <form action="/quiz" method="post">
@@ -71,7 +84,7 @@
                     </div>
                     <div class="form-item">
                         <label for="gridSize">Set grid size:</label>
-                        <select name="gridSize" id="gridSize" onchange="gridChange(this.value);">
+                        <select name="gridSize" id="gridSize" onchange="favGrid(this.value);">
                             <option value="2" selected>2 x 2</option>
                             <option value="3">3 x 3</option>
                             <option value="4">4 x 4</option>
@@ -88,19 +101,6 @@
         </div>
     </div>
 
-
-
-    <div class="preview-column">
-        <div class="window-container">
-            {% if not session.user_id %}
-            <div class="spacer"></div>
-            {% endif %}
-            <div class="window-item">
-                <div class="preview-container" id="preview-container">
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <script type="text/javascript">
 function setPreview() {
@@ -113,7 +113,7 @@ function setPreview() {
         // Create child divs to append
         let box = document.createElement('div');
         box.setAttribute('class', 'twoBy');
-        box.setAttribute('style', 'background-color: lightblue;');
+        box.setAttribute('style', 'background-color: #add8e6;');
         // Append to preview div
         preview.appendChild(box);
     }
