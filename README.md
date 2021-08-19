@@ -11,7 +11,7 @@ favorite pieces they like, quiz themselves on their favorites, and keep track of
 
 ## Getting Started
 
-A demo of the app can be viewed [here](http//:quizhibit.herokuapp.com), although you will run into problems when signed into an account. 
+A demo of the app can be viewed [here](https://quizhibit.herokuapp.com), although you will run into problems when signed into an account. 
 Please do not use any personal information for the site, it is ***not*** secure. 
 Your account may be deleted at any time, as I drop and reload the database regularly.
 
