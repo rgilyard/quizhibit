@@ -183,7 +183,6 @@ function gridChange(selectValue) {
 
     // If there is a hidden info div
     if (!preview.firstChild.getAttribute('class')) {
-        console.log('Constructing background color');
         // Delete display attribute
         background = background.slice(15, background.length);
     }
@@ -334,22 +333,3 @@ function favGrid(selectValue) {
         preview.appendChild(box);
     }
 }
-
-
-// Sets the first preview boxes on load (This is copied in the setting.html page)
-/*function setPreview() {
-    console.log('HERE');
-    // Get preview container where we'll preview the quiz grid
-    let preview = document.getElementById('preview-container');
-    // Remove all children from preview box
-    preview.innerHTML = '';
-
-    for (let i = 0; i < 4; i++) {
-        // Create child divs to append
-        let box = document.createElement('div');
-        box.setAttribute('class', 'twoBy');
-        box.setAttribute('style', 'background-color: lightblue;');
-        // Append to preview div
-        preview.appendChild(box);
-    }
-}*/
