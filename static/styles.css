@@ -403,7 +403,7 @@ h3 {
     width: 25px;
     height: 25px;
     background-size: cover;
-    z-index: 100;
+    z-index: 10;
     position: absolute;
     margin: 1%;
 }
@@ -510,8 +510,33 @@ h3 {
 }
 
 /*END REGISTER PAGE***************************************************************/
-/*FAVORITES PAGE******************************************************************/
+/*ZOOM STYLE**********************************************************************/
 
+.unzoom {
+    display: none;
+}
 
+.zoom {
+    display: flex;
+    justify-content: center;
+    z-index: 20;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+}
 
-/*END FAVORITES PAGE**************************************************************/
+.unzoom-img {
+    display: none;
+}
+
+.zoom-img {
+    z-index: 30;
+    width: 100%;
+    object-fit: contain;
+}
+
+/*END ZOOM STYLES******************************************************************/
