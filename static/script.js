@@ -183,7 +183,6 @@ function gridChange(selectValue) {
 
     // If there is a hidden info div
     if (!preview.firstChild.getAttribute('class')) {
-        console.log('Constructing background color');
         // Delete display attribute
         background = background.slice(15, background.length);
     }
@@ -335,21 +334,25 @@ function favGrid(selectValue) {
     }
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////
+// Zoom in on pictures (Quiz, Results, Gallery, Favorites, Index)
 
-// Sets the first preview boxes on load (This is copied in the setting.html page)
-/*function setPreview() {
-    console.log('HERE');
-    // Get preview container where we'll preview the quiz grid
-    let preview = document.getElementById('preview-container');
-    // Remove all children from preview box
-    preview.innerHTML = '';
+function zoom(event) {
+    console.log("IN ZOOM");
+    let image = event.target.getAttribute('src');
+    let zoomable = document.getElementById('zoomable');
+    let zoomage = document.getElementById('zoomable-img');
+    zoomable.setAttribute('class', 'zoom');
+    zoomage.setAttribute('src', image);
+    zoomage.setAttribute('class', 'zoom-img');
+}
 
-    for (let i = 0; i < 4; i++) {
-        // Create child divs to append
-        let box = document.createElement('div');
-        box.setAttribute('class', 'twoBy');
-        box.setAttribute('style', 'background-color: lightblue;');
-        // Append to preview div
-        preview.appendChild(box);
-    }
-}*/
+function unzoom() {
+    console.log("IN UNZOOM");
+    let zoomable = document.getElementById('zoomable');
+    let zoomage = document.getElementById('zoomable-img');
+    zoomable.setAttribute('class', 'unzoom');
+    zoomage.setAttribute('class', 'unzoom-img');
+}
+
+

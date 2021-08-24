@@ -20,7 +20,8 @@
                             </div>
                         </div>
                         <div class="picture-item">
-                            <img class="img" src="{{ mixes[i]["image"] }}" style="max-height: {{ width * 5 }}px;">
+                            <img class="img"  onclick="zoom(event);"
+                                src="{{ mixes[i]["image"] }}" style="max-height: {{ width * 5 }}px;">
                             <input type="hidden" name="picture{{ i }}" value="{{ mixes[i]["objectId"] }}">
                         </div>
                     </div>
