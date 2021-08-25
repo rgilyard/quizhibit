@@ -84,11 +84,11 @@
             <div class="gallery-item" style="background-image: url({{ display[i]["image"] }})">
 
                 <div class="attribution-container" onMouseEnter="onMouseOver(event);"
-                        onMouseOut="onMouseOut(event);">
+                        onMouseOut="onMouseOut(event);" src="{{ display[i]["image"] }}" onclick="zoom(event);">
                     <div class="attribution">
                         <div class="attribution-item">
-                            <p class="work-title">{{ display[i]["title"] }}</p>
                             <p class="work-artist">by {{ display[i]["artist"] }}</p>
+                            <p class="work-title">{{ display[i]["title"] }}</p>
                         </div>
                     </div>
                 </div>
@@ -99,9 +99,6 @@
     </div>
     <br>
     <div class="pages-wrapper">
-        <div class="page-count-wrapper">
-            <p class="page-count">displaying page {{ currPage }} of {{ pages }} pages</p>
-        </div>
         <div class="pages">
         {% if currPage > 1 %}
             <form class="pages-form" action="/favorites" method="post">
@@ -130,8 +127,9 @@
                 <input type="hidden" id="numPics" name="numPics" value="{{ numPics }}">
                 <input type="hidden" id="display" name="display" value="{{ display }}">
                 <input type="hidden" id="goto" name="goto" value="true">
-                <input type="submit" value="go to:">
-                <input type="text" id="gotoPage" name="gotoPage" pattern="[0-9]" max="{{ pages }}" min="1" value="{{ currPage }}" size="1">
+                <input type="text" id="gotoPage" name="gotoPage" pattern="[0-9]{1,2}" max="{{ pages }}"
+                        min="1" value="{{ currPage }}" size="2" title="Type a number between the available pages">
+                <p class="page-count"> of {{ pages }} pages</p>
             </form>
         {% if currPage < pages %}
             <form class="pages-form" action="/favorites" method="post">

@@ -45,8 +45,54 @@ db = SQL("sqlite:///met.db")
 # Seed random number
 random.seed()
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
+    # If reloading the page because a user favorited a picure
+    if request.form.get("favorite") == 'true':
+        # Get data from results page to re-render template
+        pictures = eval(request.form.get("pictures"))
+        quizAverage = float(request.form.get("quizAverage"))
+        name = request.form.get("name")
+
+        # Get objectId of new favorite picture
+        picture = request.form.get("newFav")
+        # Add picture to favorites
+        db.execute("INSERT INTO favorites (username, objectId) VALUES (?, ?);", session["user_id"], picture)
+        # Increment numFavs for picture
+        numFavsList = db.execute("SELECT numFavs FROM works WHERE objectId=?;", picture)
+        numFavs = numFavsList[0]["numFavs"]
+        numFavs += 1
+        db.execute("UPDATE works SET numFavs=? WHERE objectId=?;", numFavs, picture)
+
+        # Get bool list of when a picture is favorited
+        isFav = compFavs(session["user_id"], pictures)
+
+        # Reload results page
+        return render_template("index.html", pictures=pictures, name=name, quizAverage=quizAverage, isFav=isFav)
+
+    # If reloading the page because a user UNfavorited a picure
+    if request.form.get("unFavorite") == 'true':
+        # Get data from results page to re-render template
+        pictures = eval(request.form.get("pictures"))
+        quizAverage = float(request.form.get("quizAverage"))
+        name = request.form.get("name")
+
+        # Get objectId of picture to un-favorite
+        picture = request.form.get("unFav")
+        # Delete picture from favorites
+        db.execute("DELETE FROM favorites WHERE username=? AND objectId=?;", session["user_id"], picture)
+        # Decrement numFavs for picture
+        numFavsList = db.execute("SELECT numFavs FROM works WHERE objectId=?;", picture)
+        numFavs = numFavsList[0]["numFavs"]
+        numFavs -= 1
+        db.execute("UPDATE works SET numFavs=? WHERE objectId=?;", numFavs, picture)
+
+        # Get bool list of when a picture is favorited
+        isFav = compFavs(session["user_id"], pictures)
+
+        # Reload results page
+        return render_template("index.html", pictures=pictures, name=name, quizAverage=quizAverage, isFav=isFav)
+
     # Pick six random pictures for homepage
     rows = db.execute("SELECT * FROM works;")
     pictures = random.sample(rows, 6)
@@ -56,6 +102,10 @@ def index():
         # Get user name
         nameList = db.execute("SELECT username FROM users WHERE id=?;", session["user_id"])
         name = nameList[0]["username"]
+
+        # Get bool list of when a picture is favorited
+        isFav = compFavs(session["user_id"], pictures)
+
         # Get quiz records for user
         quizAverageList = db.execute("SELECT numGuessed, numCorrect FROM users WHERE id=?;", session["user_id"])
         # If they have taken the quiz
@@ -65,9 +115,9 @@ def index():
             # Format quiz average
             quizAverage = round(quizAverage, 2)
             # Display quiz score on homepage
-            return render_template("index.html", pictures=pictures, name=name, quizAverage=quizAverage)
+            return render_template("index.html", pictures=pictures, name=name, quizAverage=quizAverage, isFav=isFav)
 
-        return render_template("index.html", pictures=pictures, name=name)
+        return render_template("index.html", pictures=pictures, name=name, quizAverage=0.0, isFav=isFav)
 
     return render_template("index.html", pictures=pictures)
 
@@ -281,15 +331,14 @@ def results():
                 # Increment number of guesses and correct answers in user profile
                 userNumGuessedList = db.execute("SELECT numGuessed FROM users WHERE id=?;", session["user_id"])
                 userNumGuessed = int(userNumGuessedList[0]["numGuessed"]) + 1
-                userNumCorrectList = db.execute("SELECT numCorrect FROM users WHERE id=?;", session["user_id"])
-                userNumCorrect = int(userNumCorrectList[0]["numCorrect"]) + 1
-                db.execute("UPDATE users SET numGuessed=?, numCorrect=? WHERE username=?;", userNumGuessed, userNumCorrect, session["user_id"])
+                db.execute("UPDATE users SET numGuessed=? WHERE id=?;", userNumGuessed, session["user_id"])
 
             # Add a red entry to the results list for an incorrect answer
             results.append("#D68686")
 
     # Get percent correct to pass to the results page
     quizPercentCorrect = (numCorrect / numMatches) * 100
+    quizPercentCorrect = round(quizPercentCorrect, 2)
 
     # Get artwork info from works table (again) so it can be displayed
     # There are two lists to keep the order of incorrect answers
@@ -598,7 +647,7 @@ def gallery():
         # Get classifications to pass to settings
         categories = db.execute("SELECT classification FROM works GROUP BY classification;")
         # Get start with all artworks to display
-        pictures = db.execute("SELECT * FROM works;")
+        pictures = db.execute("SELECT * FROM works ORDER BY numFavs DESC;")
         # Calculate number of results
         numPics = len(pictures)
         # Make sure range doesn't go about total number of pictures

@@ -57,13 +57,21 @@ with open("openaccess/MetObjects.csv") as file:
                 # Decode the json
                 data = json.loads(url.read().decode())
 
-            db.execute("INSERT INTO works (objectId, title, artist, classification, department, image)"
-                       "VALUES (?, ?, ?, ?, ?, ?);", row["Object ID"], row["Title"], row["Artist Display Name"],
-                       row["Classification"], row["Department"], data["primaryImageSmall"])
+                # If there is an image for the work
+                if (len(data["primaryImage"]) > 0):
 
-            # Keep track of rows added to database
-            highlight += 1
-            time.sleep(.02)
+                    # Make artist info more presentable
+                    artist = row["Artist Display Name"]
+                    if "|" in artist:
+                        artist = artist.replace("|", "; ")
+
+                    db.execute("INSERT INTO works (objectId, title, artist, classification, department, image)"
+                               "VALUES (?, ?, ?, ?, ?, ?);", row["Object ID"], row["Title"], artist,
+                               row["Classification"], row["Department"], data["primaryImage"])
+
+                    # Keep track of rows added to database
+                    highlight += 1
+                    time.sleep(.02)
 
     print(totalCount, end='')
     print(" Entries Scanned")

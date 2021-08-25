@@ -29,7 +29,11 @@
             {% endfor %}
             <input type="hidden" name="numMatches" value="{{ numMatches }}">
             <input type="hidden" name="width" value="{{ width }}">
-            <button type="submit">Done</button>
+            <div class="quiz-button-wrapper">
+                <div class="quiz-button-flex-container">
+                    <input type="submit" class="quiz-button" value="Done">
+                </div>
+            </div>
         </form>
     </div>
 

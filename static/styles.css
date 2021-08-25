@@ -10,7 +10,7 @@ main {
 
 h1 {
     font-family: 'Alegreya Sans SC', sans-serif;
-    font-size: 4em;
+    font-size: 6vh;
     text-align: center;
     padding: 2% 2% 0% 2%;
 }
@@ -68,13 +68,13 @@ a:hover {
 }
 
 .banner-header {
-    font-size: 6em;
+    font-size: 12vh;
     text-align: left;
 }
 
 .main-index {
-    margin: 0% 10% 10% 10%;
-    background-color: #EFEFEF;
+    margin: 0% 5% 10% 5%;
+    background-color: #F2F2F2;
     font-size: 20px;
     padding: 3% 0% 5% 0%;
 }
@@ -97,6 +97,17 @@ a:hover {
     color: #666;
 }
 
+.index-button {
+    padding: 1px 15px 3px 15px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    background-color: #FFF;
+}
+
+.index-button:hover {
+    background-color: #DDD;
+}
+
 .index-link-container {
     display: flex;
     justify-content: center;
@@ -107,6 +118,8 @@ a:hover {
     margin: 2%;
     width: 350px;
     height: 350px;
+    max-width: 50vw;
+    max-height: 50vw;
     border-color: #DDD;
     border-width: 5px;
     border-radius: 100%;
@@ -128,6 +141,7 @@ a:hover {
     height: 100%;
     display: flex;
     flex-direction: column-reverse;
+    flex-wrap: wrap;
 }
 
 .attribution-left {
@@ -272,7 +286,7 @@ a:hover {
     flex: none;
     width: 70%;
     padding: .5%;
-    background-color: #cccccc;
+    background-color: #EEE;
 }
 
 .grid-container {
@@ -284,7 +298,6 @@ a:hover {
 .grid-item {
     flex: none;
     padding: 1%;
-    /*background-color: #dddddd;*/
 }
 
 .picture-container {
@@ -296,7 +309,7 @@ a:hover {
 .picture-item {
     flex: none;
     padding: 1%;
-    background-color: #efefef;
+    background-color: #FFF;
 }
 
 .img {
@@ -315,7 +328,7 @@ a:hover {
     flex: none;
     width: 30%;
     padding: .5%;
-    background-color: #cccccc;
+    background-color: #EEE;
 }
 
 .answer-container {
@@ -347,6 +360,7 @@ a:hover {
     text-align: center;
     padding: 1%;
     background-color: white;
+    border-radius: 5px;
 }
 
 .by {
@@ -358,6 +372,27 @@ h3 {
     font-size: 1rem;
     line-height: 1;
     margin: 0;
+}
+
+.quiz-button-wrapper {
+    width: 100%;
+}
+
+.quiz-button-flex-container {
+    display: flex;
+    justify-content: center;
+}
+
+.quiz-button {
+    margin: 1%;
+    padding: 1px 15px 3px 15px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    background-color: #FFF;
+}
+
+.quiz-button:hover {
+    background-color: #DDD;
 }
 
 /*END QUIZ PAGE*****************************************************************/
@@ -411,6 +446,13 @@ h3 {
 .heart:hover {
     width: 28px;
     height: 28px;
+}
+
+.heart:active {
+    background-image: url('images/heartOutline.png');
+    opacity: 0.75;
+    width: 24px;
+    height: 24px;
 }
 
 .empty {
@@ -478,14 +520,10 @@ h3 {
     flex-direction: column-reverse;
 }
 
-.page-count-wrapper {
-    display: flex;
-    justify-content: center;
-}
-
 .page-count {
-    margin: 1%;
     font-style: italic;
+    white-space: nowrap;
+    display: inline;
 }
 
 .pages {
@@ -520,13 +558,14 @@ h3 {
     display: flex;
     justify-content: center;
     z-index: 20;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     height: 100%;
     width: 100%;
+    background: rgba(0,0,0,0.6);
 }
 
 .unzoom-img {
@@ -535,8 +574,8 @@ h3 {
 
 .zoom-img {
     z-index: 30;
-    width: 100%;
     object-fit: contain;
+    border: 10px solid #FFF;
 }
 
 /*END ZOOM STYLES******************************************************************/

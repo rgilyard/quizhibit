@@ -27,11 +27,32 @@
         <div>Full heart icons made by <a href="https://www.flaticon.com/authors/kiranshastry" target="_blank" title="Kiranshastry">Kiranshastry</a>
             from <a href="https://www.flaticon.com/" target="_blank" title="Flaticon">www.flaticon.com</a></div>
     </div>
-
+    <hr>
     <div class="index-link-container">
-        <img src="{{ pictures[0]["image"] }}" class="index-pic" alt="{{ pictures[0]["title"] }}">
+        {% if session.user_id %}
+            {% if isFav[0] == False %}
+                <form action="/" method="post">
+                    <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                    <input type="hidden" id="name" name="name" value="{{ name }}">
+                    <input type="hidden" id="quizAverage" name="quizAverage" value="{{ quizAverage }}">
+                    <input type="hidden" id="newFav" name="newFav" value="{{ pictures[0]["objectId"] }}">
+                    <input type="hidden" id="favorite" name="favorite" value="true">
+                    <button name="heart" id="heart" type="submit" class="heart empty"></button>
+                </form>
+            {% else %}
+                <form action="/" method="post">
+                    <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                    <input type="hidden" id="name" name="name" value="{{ name }}">
+                    <input type="hidden" id="quizAverage" name="quizAverage" value="{{ quizAverage }}">
+                    <input type="hidden" id="unFav" name="unFav" value="{{ pictures[0]["objectId"] }}">
+                    <input type="hidden" id="unFavorite" name="unFavorite" value="true">
+                    <button name="heart" id="heart" type="submit" class="heart full"></button>
+                </form>
+            {% endif %}
+        {% endif %}
+        <img src="{{ pictures[0]["image"] }}" class="index-pic" alt="{{ pictures[0]["title"] }}" onclick="zoom(event);">
         <div class="index-description">
-            <h2><a href="/quiz">Quiz</a></h2>
+            <h2><a href="/quiz" class="index-button">Quiz</a></h2>
             <p>Match the works of art to the artist and title!</p>
             <div class="attribution-container">
                 <div class="attribution-left">
@@ -44,7 +65,7 @@
     <hr>
     <div class="index-link-container">
         <div class="index-description-right">
-            <h2><a href="/gallery">Gallery</a></h2>
+            <h2><a href="/gallery" class="index-button">Gallery</a></h2>
             <p>Bowse the public domain works on display at the Met</p>
             <div class="attribution-container">
                 <div class="attribution-right">
@@ -53,13 +74,55 @@
                 </div>
             </div>
         </div>
-        <img src="{{ pictures[1]["image"] }}" class="index-pic" alt="{{ pictures[1]["title"] }}">
+        {% if session.user_id %}
+            {% if isFav[1] == False %}
+                <form action="/" method="post">
+                    <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                    <input type="hidden" id="name" name="name" value="{{ name }}">
+                    <input type="hidden" id="quizAverage" name="quizAverage" value="{{ quizAverage }}">
+                    <input type="hidden" id="newFav" name="newFav" value="{{ pictures[1]["objectId"] }}">
+                    <input type="hidden" id="favorite" name="favorite" value="true">
+                    <button name="heart" id="heart" type="submit" class="heart empty"></button>
+                </form>
+            {% else %}
+                <form action="/" method="post">
+                    <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                    <input type="hidden" id="name" name="name" value="{{ name }}">
+                    <input type="hidden" id="quizAverage" name="quizAverage" value="{{ quizAverage }}">
+                    <input type="hidden" id="unFav" name="unFav" value="{{ pictures[1]["objectId"] }}">
+                    <input type="hidden" id="unFavorite" name="unFavorite" value="true">
+                    <button name="heart" id="heart" type="submit" class="heart full"></button>
+                </form>
+            {% endif %}
+        {% endif %}
+        <img src="{{ pictures[1]["image"] }}" class="index-pic" alt="{{ pictures[1]["title"] }}" onclick="zoom(event);">
     </div>
     <hr>
     <div class="index-link-container">
-        <img src="{{ pictures[2]["image"] }}" class="index-pic" alt="{{ pictures[2]["title"] }}">
+        {% if session.user_id %}
+            {% if isFav[2] == False %}
+                <form action="/" method="post">
+                    <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                    <input type="hidden" id="name" name="name" value="{{ name }}">
+                    <input type="hidden" id="quizAverage" name="quizAverage" value="{{ quizAverage }}">
+                    <input type="hidden" id="newFav" name="newFav" value="{{ pictures[2]["objectId"] }}">
+                    <input type="hidden" id="favorite" name="favorite" value="true">
+                    <button name="heart" id="heart" type="submit" class="heart empty"></button>
+                </form>
+            {% else %}
+                <form action="/" method="post">
+                    <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                    <input type="hidden" id="name" name="name" value="{{ name }}">
+                    <input type="hidden" id="quizAverage" name="quizAverage" value="{{ quizAverage }}">
+                    <input type="hidden" id="unFav" name="unFav" value="{{ pictures[2]["objectId"] }}">
+                    <input type="hidden" id="unFavorite" name="unFavorite" value="true">
+                    <button name="heart" id="heart" type="submit" class="heart full"></button>
+                </form>
+            {% endif %}
+        {% endif %}
+        <img src="{{ pictures[2]["image"] }}" class="index-pic" alt="{{ pictures[2]["title"] }}" onclick="zoom(event);">
         <div class="index-description">
-            <h2><a href="/register">Register</a></h2>
+            <h2><a href="/register" class="index-button">Register</a></h2>
             <p>Make and account to manage favorites</p>
             <div class="attribution-container">
                 <div class="attribution-left">
@@ -72,7 +135,7 @@
     <hr>
     <div class="index-link-container">
         <div class="index-description-right">
-            <h2><a href="/aboutme">About Me</a></h2>
+            <h2><a href="/aboutme" class="index-button">About Me</a></h2>
             <p>Read about Rachel Gilyard, creator of this web app</p>
             <div class="attribution-container">
                 <div class="attribution-right">
@@ -81,13 +144,55 @@
                 </div>
             </div>
         </div>
-        <img src="{{ pictures[3]["image"] }}" class="index-pic" alt="{{ pictures[3]["title"] }}">
+        {% if session.user_id %}
+            {% if isFav[3] == False %}
+                <form action="/" method="post">
+                    <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                    <input type="hidden" id="name" name="name" value="{{ name }}">
+                    <input type="hidden" id="quizAverage" name="quizAverage" value="{{ quizAverage }}">
+                    <input type="hidden" id="newFav" name="newFav" value="{{ pictures[3]["objectId"] }}">
+                    <input type="hidden" id="favorite" name="favorite" value="true">
+                    <button name="heart" id="heart" type="submit" class="heart empty"></button>
+                </form>
+            {% else %}
+                <form action="/" method="post">
+                    <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                    <input type="hidden" id="name" name="name" value="{{ name }}">
+                    <input type="hidden" id="quizAverage" name="quizAverage" value="{{ quizAverage }}">
+                    <input type="hidden" id="unFav" name="unFav" value="{{ pictures[3]["objectId"] }}">
+                    <input type="hidden" id="unFavorite" name="unFavorite" value="true">
+                    <button name="heart" id="heart" type="submit" class="heart full"></button>
+                </form>
+            {% endif %}
+        {% endif %}
+        <img src="{{ pictures[3]["image"] }}" class="index-pic" alt="{{ pictures[3]["title"] }}" onclick="zoom(event);">
     </div>
     <hr>
     <div class="index-link-container">
-        <img src="{{ pictures[4]["image"] }}" class="index-pic" alt="{{ pictures[4]["title"] }}">
+        {% if session.user_id %}
+            {% if isFav[4] == False %}
+                <form action="/" method="post">
+                    <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                    <input type="hidden" id="name" name="name" value="{{ name }}">
+                    <input type="hidden" id="quizAverage" name="quizAverage" value="{{ quizAverage }}">
+                    <input type="hidden" id="newFav" name="newFav" value="{{ pictures[4]["objectId"] }}">
+                    <input type="hidden" id="favorite" name="favorite" value="true">
+                    <button name="heart" id="heart" type="submit" class="heart empty"></button>
+                </form>
+            {% else %}
+                <form action="/" method="post">
+                    <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                    <input type="hidden" id="name" name="name" value="{{ name }}">
+                    <input type="hidden" id="quizAverage" name="quizAverage" value="{{ quizAverage }}">
+                    <input type="hidden" id="unFav" name="unFav" value="{{ pictures[4]["objectId"] }}">
+                    <input type="hidden" id="unFavorite" name="unFavorite" value="true">
+                    <button name="heart" id="heart" type="submit" class="heart full"></button>
+                </form>
+            {% endif %}
+        {% endif %}
+        <img src="{{ pictures[4]["image"] }}" class="index-pic" alt="{{ pictures[4]["title"] }}" onclick="zoom(event);">
         <div class="index-description">
-            <h2><a href="https://metmuseum.github.io/" target="_blank">Met API</a></h2>
+            <h2><a href="https://metmuseum.github.io/" target="_blank" class="index-button">Met API</a></h2>
             <p>Visit the The Metropolitan Museum of Art Collection API page</p>
             <div class="attribution-container">
                 <div class="attribution-left">
@@ -100,7 +205,7 @@
     <hr>
     <div class="index-link-container">
         <div class="index-description-right">
-            <h2><a href="https://cs50.harvard.edu/x/2021/" target="_blank">CS50x</a></h2>
+            <h2><a href="https://cs50.harvard.edu/x/2021/" target="_blank" class="index-button">CS50x</a></h2>
             <p>Learn to make your own web app with the free CS50x course!</p>
             <div class="attribution-container">
                 <div class="attribution-right">
@@ -109,7 +214,28 @@
                 </div>
             </div>
         </div>
-        <img src="{{ pictures[5]["image"] }}" class="index-pic" alt="{{ pictures[5]["title"] }}">
+        {% if session.user_id %}
+            {% if isFav[5] == False %}
+                <form action="/" method="post">
+                    <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                    <input type="hidden" id="name" name="name" value="{{ name }}">
+                    <input type="hidden" id="quizAverage" name="quizAverage" value="{{ quizAverage }}">
+                    <input type="hidden" id="newFav" name="newFav" value="{{ pictures[5]["objectId"] }}">
+                    <input type="hidden" id="favorite" name="favorite" value="true">
+                    <button name="heart" id="heart" type="submit" class="heart empty"></button>
+                </form>
+            {% else %}
+                <form action="/" method="post">
+                    <input type="hidden" id="pictures" name="pictures" value="{{ pictures }}">
+                    <input type="hidden" id="name" name="name" value="{{ name }}">
+                    <input type="hidden" id="quizAverage" name="quizAverage" value="{{ quizAverage }}">
+                    <input type="hidden" id="unFav" name="unFav" value="{{ pictures[5]["objectId"] }}">
+                    <input type="hidden" id="unFavorite" name="unFavorite" value="true">
+                    <button name="heart" id="heart" type="submit" class="heart full"></button>
+                </form>
+            {% endif %}
+        {% endif %}
+        <img src="{{ pictures[5]["image"] }}" class="index-pic" alt="{{ pictures[5]["title"] }}" onclick="zoom(event);">
     </div>
 </div>
 {% endblock %}

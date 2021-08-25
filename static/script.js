@@ -338,8 +338,8 @@ function favGrid(selectValue) {
 // Zoom in on pictures (Quiz, Results, Gallery, Favorites, Index)
 
 function zoom(event) {
-    console.log("IN ZOOM");
     let image = event.target.getAttribute('src');
+    console.log(image);
     let zoomable = document.getElementById('zoomable');
     let zoomage = document.getElementById('zoomable-img');
     zoomable.setAttribute('class', 'zoom');
@@ -348,11 +348,11 @@ function zoom(event) {
 }
 
 function unzoom() {
-    console.log("IN UNZOOM");
     let zoomable = document.getElementById('zoomable');
     let zoomage = document.getElementById('zoomable-img');
     zoomable.setAttribute('class', 'unzoom');
     zoomage.setAttribute('class', 'unzoom-img');
 }
+
 
 
