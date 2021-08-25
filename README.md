@@ -70,32 +70,38 @@ A list of the app's dependencies.
 Welcomes the user when signed in and shows them their quiz average if they've taken at least one quiz. The artworks featured
 on the homepage are chosen at random and change on every visit.
 
-***Insert picture of the hompage***
+![homepage](screenshots/homepage.png)
 
 ### Quiz
 
 Quiz settings are previewed with a grid mock up that changes colors with difficulty. When signed in, the user can quiz themselves on their
 favorites works of art.
 
-***Pictures of preview***
+![preview](screenshots/preview.png)
 
 Drag and drop the title of the artwork to the matching image.
 
-***Pictures of quiz page***
+![quiz](screenshots/quiz.png)
 
 You can favorite artwork from the results page.
 
-***Pictures of the results page***
+![results](screenshots/results/png)
 
 ### Gallery
 
 You can browse, search, and favorites pieces from the gallery page.
 
-***Gallery picture***
+![gallery](screenshots/gallery.png)
 
 ### Favorites
 
 Do the same on the favorites page, but with all of your most loved art pieces.
 
-***Favorites Photo***
+![favorites](screenshots/favorites.png)
+
+### Zoom
+
+Click on any picture to see it in more detail!
+
+![zoom](screenshots/zoom.png)
 
