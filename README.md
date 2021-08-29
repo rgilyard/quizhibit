@@ -1,4 +1,7 @@
 # Quizhibit
+#### Video Demo:  https://www.youtube.com/watch?v=2-hk4asgF7s
+#### Description: Quizhibit is an art quiz app, gallery browser, and search tool for the featured pieces in the Metropolitan Museum of Art. Registered users can
+favorite pieces they like, quiz themselves on their favorites, and keep track of their average quiz score.
 
 ***
 
