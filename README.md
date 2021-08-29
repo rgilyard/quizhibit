@@ -1,15 +1,13 @@
 # Quizhibit
 #### Video Demo:  https://www.youtube.com/watch?v=2-hk4asgF7s
-#### Description: Quizhibit is an art quiz app, gallery browser, and search tool for the featured pieces in the Metropolitan Museum of Art. Registered users can
-favorite pieces they like, quiz themselves on their favorites, and keep track of their average quiz score.
+#### Description: Quizhibit is an art quiz app, gallery browser, and search tool for the featured pieces in the
+Metropolitan Museum of Art.
 
 ***
 
 **This is my first web app and it is currently in active development. It relies on the Metropolitan Museum API, which may change at any time. Many features are still in progress.**
 
 The Metropolitan Museum of Art API is [here](https://metmuseum.github.io/). This app is not affiliated with or endorced by the Metropolitan Museum of Art.
-
-A video demos is available here: https://www.youtube.com/watch?v=2-hk4asgF7s
 
 Quizhibit is an art quiz app, gallery browser, and search tool for the featured pieces in the Metropolitan Museum of Art. Registered users can
 favorite pieces they like, quiz themselves on their favorites, and keep track of their average quiz score.
