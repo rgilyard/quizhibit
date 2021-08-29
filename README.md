@@ -2,8 +2,14 @@
 
 ***
 
+<<<<<<< HEAD
 **This is my first web app and it is currently in active development. It's been deployed on Heroku for practice, but it's very buggy on there.
 The Metropolitan Museum API may change at anytime. Many feautres are still in progress.**
+=======
+**This is my first web app and it is currently in active development. It relies on the Metropolitan Museum API, which may change at any time. Many features are still in progress.**
+
+The Metropolitan Museum of Art API is [here](https://metmuseum.github.io/). This app is not affiliated with or endorced by the Metropolitan Museum of Art.
+>>>>>>> 6eb8242cb3efac0e75a43a78de9bdab8dc7ce05e
 
 A video demos is available here: https://www.youtube.com/watch?v=2-hk4asgF7s
 
@@ -12,15 +18,21 @@ favorite pieces they like, quiz themselves on their favorites, and keep track of
 
 ## Getting Started
 
+<<<<<<< HEAD
 A demo of the app can be viewed [here](https://quizhibit.herokuapp.com), although you will run into problems when signed into an account.
 Please do not use any personal information for the site, it is ***not*** secure.
+=======
+A demo of the app can be viewed [here](https://quizhibit.herokuapp.com), but "logged in" features are not currently useable due to the way heroku handles sessions. 
+Please do not use any personal information for the site, it is ***not*** secure. 
+>>>>>>> 6eb8242cb3efac0e75a43a78de9bdab8dc7ce05e
 Your account may be deleted at any time, as I drop and reload the database regularly.
 
-I believe the dependencies can be installed with:
+If you would like to run the app yourself, the dependencies can be installed with:
 ```
 pip install -r requirements.txt
 ```
 
+You will also need to add the Met API [openaccess](https://github.com/metmuseum/openaccess) directory into the main directory. This contains the Met CSV file which is used by load.py to populate the app's databases.
 
 ## Files
 
@@ -39,7 +51,7 @@ flask run
 ### helpers.py
 
 This file contains the helper functions for app.py. This includes some the login decorator, some SQL search functions, and function that helps
-label an artwork as favorited or not.
+label an artwork as favorited or not when generating pages.
 
 ### load.py
 
@@ -52,13 +64,16 @@ and it takes several minutes to complete.
 
 load.py also consolidates some of the sparser categories and reformats the data to be more readable.
 
+<<<<<<< HEAD
 
 ### met.db
+=======
+### met.db 
+>>>>>>> 6eb8242cb3efac0e75a43a78de9bdab8dc7ce05e
 
 The works table holds the artwork information, links to the images, and data on how often they've been guessed correctly in the quiz.
-The users table holds usernames, hashed passwords, user id's, and quiz records. The favorites tables keeps track of the artwork id's and
+The users table holds usernames, hashed passwords, user id's, and quiz records. The favorites table keeps track of the artwork id's and
 user id's.
-
 
 ### requirements.txt
 
@@ -75,7 +90,7 @@ on the homepage are chosen at random and change on every visit.
 
 ### Quiz
 
-Quiz settings are previewed with a grid mock up that changes colors with difficulty. When signed in, the user can quiz themselves on their
+Quiz settings are previewed with a grid mockup that changes colors and size with difficulty. When signed in, the user can quiz themselves on their
 favorites works of art.
 
 ![preview](screenshots/preview.png)
@@ -86,7 +101,7 @@ Drag and drop the title of the artwork to the matching image.
 
 You can favorite artwork from the results page.
 
-![results](screenshots/results/png)
+![results](screenshots/results.png)
 
 ### Gallery
 
