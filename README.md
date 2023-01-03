@@ -7,14 +7,14 @@ Metropolitan Museum of Art.
 
 **This is my first web app and it is currently in active development. It relies on the Metropolitan Museum API, which may change at any time. Many features are still in progress.**
 
-The Metropolitan Museum of Art API is [~~here~~](https://metmuseum.github.io/) (Free hosting ran out, the link is not longer valid). This app is not affiliated with or endorced by the Metropolitan Museum of Art.
+The Metropolitan Museum of Art API is [here](https://metmuseum.github.io/). This app is not affiliated with or endorced by the Metropolitan Museum of Art.
 
 Quizhibit is an art quiz app, gallery browser, and search tool for the featured pieces in the Metropolitan Museum of Art. Registered users can
 favorite pieces they like, quiz themselves on their favorites, and keep track of their average quiz score.
 
 ## Getting Started
 
-A demo of the app can be viewed [--here--](https://quizhibit.herokuapp.com), but "logged in" features are not currently useable due to the way heroku handles sessions.
+A demo of the app can be viewed [~~here~~](https://quizhibit.herokuapp.com) (Free hosting ran out, the link is not longer valid), but "logged in" features are not currently useable due to the way heroku handles sessions.
 Please do not use any personal information for the site, it is ***not*** secure.
 Your account may be deleted at any time, as I drop and reload the database regularly.
 
